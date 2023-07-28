@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet var redLabel: UIView!
     @IBOutlet var yellowLabel: UIView!
@@ -15,47 +15,39 @@ class ViewController: UIViewController {
     
     @IBOutlet var startButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        redLabel.layer.cornerRadius = redLabel.frame.width / 2
-        yellowLabel.layer.cornerRadius = yellowLabel.frame.width / 2
-        greenLabel.layer.cornerRadius = greenLabel.frame.width / 2
+        view.backgroundColor = UIColor.blue   // просто для красоты )
         
         redLabel.alpha = 0.3
         yellowLabel.alpha = 0.3
         greenLabel.alpha = 0.3
     }
     
+    override func viewWillLayoutSubviews() {
+        redLabel.layer.cornerRadius = redLabel.frame.width / 2
+        yellowLabel.layer.cornerRadius = yellowLabel.frame.width / 2
+        greenLabel.layer.cornerRadius = greenLabel.frame.width / 2
+    }
+    
     @IBAction func pushStartButton() {
-   
-        if redLabel.alpha != 1 && yellowLabel.alpha != 1 && greenLabel.alpha != 1 {
-            startButton.setTitle("NEXT", for: .normal)
-            redLabel.alpha = 1
-            yellowLabel.alpha = 0.3
-            greenLabel.alpha = 0.3
-        } else if redLabel.alpha == 1 && yellowLabel.alpha != 1 && greenLabel.alpha != 1 {
-            startButton.setTitle("NEXT", for: .normal)
+        
+        startButton.setTitle("NEXT", for: .normal)
+        
+        if redLabel.alpha == 1 {
             redLabel.alpha = 0.3
             yellowLabel.alpha = 1
-            greenLabel.alpha = 0.3
-        } else if redLabel.alpha != 1 && yellowLabel.alpha == 1 && greenLabel.alpha != 1{
-            startButton.setTitle("NEXT", for: .normal)
-            redLabel.alpha = 0.3
+        } else if yellowLabel.alpha == 1 {
             yellowLabel.alpha = 0.3
             greenLabel.alpha = 1
         } else {
-            startButton.setTitle("NEXT", for: .normal)
-            redLabel.alpha = 1
-            yellowLabel.alpha = 0.3
             greenLabel.alpha = 0.3
+            redLabel.alpha = 1
         }
-        
     }
-    
-    
-    
-    
 }
+
+        
+
 
